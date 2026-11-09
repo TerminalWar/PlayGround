@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07100f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1917'/%3E%3Ctext x='14' y='47' font-size='48' font-family='sans-serif' font-weight='700' fill='%239dffbd'%3EG%3C/text%3E%3C/svg%3E" />
+  <title>GHOSTLINE — Network Intrusion Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Ghostline home"><span class="brand-mark">G<span>·</span></span><span>GHOST<span class="brand-dim">LINE</span></span></a>
+      <div class="top-center"><span class="live-dot"></span><span>SECURE RELAY ACTIVE</span><span class="top-divider">/</span><span id="clock">00:00:00</span></div>
+      <div class="wallet"><span class="wallet-icon">◈</span><span id="wallet">₡ 1,250</span></div>
+    </header>
+
+    <main class="layout">
+      <section class="game-column">
+        <div class="mission-head">
+          <div>
+            <div class="eyebrow"><span id="contract-tag">CONTRACT 01</span><span class="tag-separator">•</span><span id="difficulty">LOW EXPOSURE</span></div>
+            <h1 id="mission-title">Ghost in the Grid</h1>
+            <p id="mission-description">Slip into a private archive and extract a ledger fragment.</p>
+          </div>
+          <div class="timer-box"><span class="tiny-label">TRACE WINDOW</span><strong id="timer">01:42</strong><span class="timer-bar"><i id="timer-fill"></i></span></div>
+        </div>
+
+        <div class="target-strip">
+          <div class="target-icon">⌁</div>
+          <div class="target-info"><span class="tiny-label">TARGET SYSTEM</span><strong id="target-name">NORTHSTAR // ARCHIVE-7</strong></div>
+          <div class="target-reward"><span class="tiny-label">PAYOUT</span><strong id="reward">₡ 840 <small>+ quality bonus</small></strong></div>
+        </div>
+
+        <div class="board-wrap">
+          <div class="board-top"><div><span class="board-live"></span> LIVE TOPOLOGY</div><div class="board-hint" id="board-hint">Select a node adjacent to ENTRY to build your route</div><button class="icon-btn" id="reset-route" title="Reset route" aria-label="Reset route">↺</button></div>
+          <div class="network-board" id="board" aria-label="Interactive network node graph">
+            <svg id="edges" class="edges" aria-hidden="true"></svg>
+            <div class="board-scan"></div>
+            <div id="nodes"></div>
+            <div class="board-corner corner-tl"></div><div class="board-corner corner-br"></div>
+          </div>
+          <div class="board-legend"><span><i class="legend-dot entry"></i>ENTRY</span><span><i class="legend-dot relay"></i>RELAY</span><span><i class="legend-dot firewall"></i>FIREWALL</span><span><i class="legend-dot objective"></i>OBJECTIVE</span><span class="legend-route"><i></i>YOUR ROUTE</span></div>
+        </div>
+
+        <div class="route-card">
+          <div class="route-head"><div><span class="tiny-label">CURRENT ROUTE</span><strong id="route-state">No route built</strong></div><div class="route-score"><span class="tiny-label">LINK QUALITY</span><strong id="quality">—</strong></div></div>
+          <div id="route-chips" class="route-chips"><span class="route-empty">Tap connected nodes in sequence to build a path.</span></div>
+          <div class="route-footer"><span id="route-tip">Clean links pay more. Firewalls and dead ends raise trace risk.</span><button class="execute-btn" id="execute" disabled><span>EXECUTE BREACH</span><span>↗</span></button></div>
+        </div>
+      </section>
+
+      <aside class="side-column">
+        <section class="side-card objective-card">
+          <div class="section-heading"><span class="section-icon">◎</span><div><span class="tiny-label">OPERATION BRIEF</span><h2>Mission objectives</h2></div></div>
+          <div class="objective-list" id="objectives"></div>
+          <div class="intel-note"><span>i</span><p id="intel">An exposed relay is a safer route. The firewall is optional—but it can pay off.</p></div>
+        </section>
+
+        <section class="side-card stats-card">
+          <div class="section-heading"><span class="section-icon">⌁</span><div><span class="tiny-label">OPERATOR STATUS</span><h2>On the wire</h2></div><span class="status-pill">ONLINE</span></div>
+          <div class="stat-grid"><div><span class="tiny-label">REPUTATION</span><strong id="rep">NOVICE <small>01</small></strong><div class="micro-progress"><i id="rep-fill"></i></div></div><div><span class="tiny-label">TRACE HEAT</span><strong id="heat">12<span>%</span></strong><div class="micro-progress heat-progress"><i id="heat-fill"></i></div></div></div>
+          <div class="upgrade-row"><div class="upgrade-symbol">⌘</div><div class="upgrade-copy"><strong>Signal scrambler</strong><span id="upgrade-label">Reduce trace gain on every operation</span></div><button id="upgrade" class="upgrade-btn">₡ 650 <span>↗</span></button></div>
+        </section>
+
+        <section class="side-card log-card"><div class="log-header"><div class="section-heading"><span class="section-icon">▤</span><div><span class="tiny-label">ENCRYPTED FEED</span><h2>Activity log</h2></div></div><button id="clear-log" class="text-btn">CLEAR</button></div><div id="log" class="log-list" aria-live="polite"></div></section>
+        <div class="footer-note"><span class="lock">▣</span> SIMULATION ENVIRONMENT <span class="footer-dot">•</span> ALL SYSTEMS FICTIONAL</div>
+      </aside>
+    </main>
+
+    <div id="result-modal" class="modal-backdrop" hidden><section class="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="result-emblem" id="result-emblem">✓</div><span class="tiny-label" id="result-kicker">OPERATION COMPLETE</span><h2 id="result-title">Clean extraction</h2><p id="result-copy"></p><div class="result-stats"><div><span class="tiny-label">CREDITS EARNED</span><strong id="result-money">₡ 0</strong></div><div><span class="tiny-label">LINK RATING</span><strong id="result-rating">A</strong></div></div><button class="next-btn" id="next-mission">NEXT CONTRACT <span>→</span></button></section></div>
+    <div id="toast" class="toast" role="status"></div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

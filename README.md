@@ -16,3 +16,10 @@
 - 👤 [Explore the creator's projects](https://go.ondev.store/TerminalWar).
 - 🌍 [Create with OMGithub](https://go.ondev.store/).
 <!-- omgithub:readme:end -->
+
+## GHOSTLINE
+
+A responsive, touch-friendly node-routing game. Tap connected nodes in sequence to build a route from **ENTRY** to the target, then execute the breach. Clean paths improve your payout and reduce trace risk; caches add bonuses, while ICE and decoy nodes increase risk. Earn credits, upgrade your signal scrambler, build reputation, and tackle repeating contract cycles with scaling rewards.
+
+- **Controls:** Tap/click a highlighted adjacent node to extend the route. Tap an earlier visited node to rewind; use ↺ to reset.
+- **Run locally:** Open `index.html` in a browser, or start a static server with `python3 -m http.server 3002`.
